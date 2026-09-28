@@ -120,6 +120,10 @@ window.WEDDING_DATA = {
 
   gallery: [
     {
+      src: "./editable/assets/couple-4.jpg",
+      alt: "Devangana and Hansraj with traditional Assamese wedding greeting"
+    },
+    {
       src: "./editable/assets/couple-1.jpg",
       alt: "Devangana and Hansraj in traditional attire"
     },
