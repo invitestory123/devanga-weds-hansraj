@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Devangana(Riya) Weds Hansraj(Neer) — Wedding Invitation</title>
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <script src="./editable/wedding-data.js"></script>
+    <script type="module" crossorigin src="./assets/index-BmbkA8aA.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/styles-BgdVW63E.css">
+    <style>
+      #music-control {
+        position: fixed;
+        top: 1.25rem;
+        right: 1.25rem;
+        z-index: 45;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      #music-btn {
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: 9999px;
+        background: rgba(42, 11, 14, 0.85);
+        border: 1px solid rgba(201, 146, 47, 0.65);
+        color: #c9922f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        padding: 0;
+        outline: none;
+      }
+      #music-btn:hover {
+        transform: scale(1.08);
+        border-color: #e5b95f;
+        box-shadow: 0 0 16px rgba(201, 146, 47, 0.5);
+      }
+      #music-btn:active {
+        transform: scale(0.95);
+      }
+      #music-btn.playing .music-disc {
+        animation: spin-disc 4s linear infinite;
+      }
+      #music-btn.playing {
+        box-shadow: 0 0 14px rgba(201, 146, 47, 0.4);
+      }
+      @keyframes spin-disc {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- Music Player -->
+    <div id="music-control">
+      <audio id="wedding-audio" src="./editable/assets/music.webm" loop preload="auto"></audio>
+      <button id="music-btn" type="button" aria-label="Toggle background music" title="Play / Pause Music">
+        <svg class="music-disc" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M12 2a10 10 0 0 1 10 10" stroke-width="2.5" stroke="#e5b95f"></path>
+        </svg>
+      </button>
+    </div>
+
+    <script>
+      (function() {
+        const audio = document.getElementById('wedding-audio');
+        const btn = document.getElementById('music-btn');
+        let hasInteracted = false;
+
+        function updateState() {
+          if (!audio.paused) {
+            btn.classList.add('playing');
+          } else {
+            btn.classList.remove('playing');
+          }
+        }
+
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (audio.paused) {
+            audio.play().then(updateState).catch(() => {});
+          } else {
+            audio.pause();
+            updateState();
+          }
+        });
+
+        function tryAutoPlay() {
+          if (hasInteracted) return;
+          hasInteracted = true;
+          audio.play().then(updateState).catch(function() {
+            // Autoplay blocked; user can tap button
+          });
+          window.removeEventListener('click', tryAutoPlay);
+          window.removeEventListener('touchstart', tryAutoPlay);
+          window.removeEventListener('scroll', tryAutoPlay);
+        }
+
+        window.addEventListener('click', tryAutoPlay, { passive: true, once: true });
+        window.addEventListener('touchstart', tryAutoPlay, { passive: true, once: true });
+        window.addEventListener('scroll', tryAutoPlay, { passive: true, once: true });
+        audio.addEventListener('play', updateState);
+        audio.addEventListener('pause', updateState);
+      })();
+    </script>
+  </body>
+</html>
