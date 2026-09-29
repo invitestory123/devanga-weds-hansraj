@@ -5,8 +5,8 @@
 window.WEDDING_DATA = {
   brand: "InviteStory",
   meta: {
-    title: "Devangana (Riya) Weds Hansraj (Neer) — Wedding Invitation",
-    description: "Together with their families, Devangana (Riya) and Hansraj (Neer) invite you to celebrate their Wedding Reception on Friday, 11th December 2026 at Jaanki Farms and Resorts, Dhapkota, Jorhat, Assam.",
+    title: "Devangana (Riya) Weds Hansraj (Neer) — Wedding Reception",
+    description: "Devangana (Riya) and Hansraj (Neer) invite you to celebrate their Wedding Reception on Friday, 11th December 2026 at Jaanki Farms and Resorts, Dhapkota, Jorhat, Assam.",
     url: "https://devanga-weds-hansraj.invitestory.in/",
     ogImage: "https://devanga-weds-hansraj.invitestory.in/assets/og-image.jpg"
   },
@@ -16,7 +16,7 @@ window.WEDDING_DATA = {
     coupleLine: ["Devangana (Riya)", "Hansraj (Neer)"],
     connector: "weds",
     hashtag: "#DevanganaWedsHansraj",
-    intro: "Together with their families"
+    intro: ""
   },
 
   wedding: {
@@ -45,14 +45,14 @@ window.WEDDING_DATA = {
       name: "Wedding Reception",
       badge: "Wedding Reception",
       tamil: "",
-      description: "Together with their families, Devangana & Hansraj invite you to celebrate their wedding reception.",
+      description: "",
       start: "2026-12-11T15:00:00+05:30",
       end: "2026-12-11T21:00:00+05:30",
       timeLabel: "Fri, 11 Dec · 3:00 PM to 9:00 PM",
       venue: "Jaanki Farms and Resorts",
       address: "Dhapkota, Jorhat, Assam 785006",
-      dressCode: "Traditional / Festive Attire",
-      dressColor: "#c9922f"
+      dressCode: "",
+      dressColor: ""
     }
   ],
 
