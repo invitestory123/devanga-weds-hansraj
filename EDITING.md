@@ -37,7 +37,7 @@ All text, dates, events, venue, story milestones, and images live in:
 ## Replacing Assets
 
 Drop customer replacement images into `editable/assets/`:
-- `editable/assets/couple-1.jpg` … `couple-4.jpg` — Moments swipe gallery
+- `editable/assets/couple-*.jpg` — Moments swipe gallery
 - `editable/assets/hero-flatlay.jpg` — Flatlay decorative image
 - `editable/assets/gopuram.png` — Gopuram line illustration
 
