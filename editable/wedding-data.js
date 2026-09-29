@@ -5,15 +5,15 @@
 window.WEDDING_DATA = {
   brand: "InviteStory",
   meta: {
-    title: "Devangana(Riya) Weds Hansraj(Neer) — Wedding Invitation",
-    description: "Together with their families, Devangana(Riya) and Hansraj(Neer) invite you to celebrate their Wedding Reception on Friday, 11th December 2026 at Jaanki Farms and Resorts, Dhapkota, Jorhat, Assam.",
+    title: "Devangana (Riya) Weds Hansraj (Neer) — Wedding Invitation",
+    description: "Together with their families, Devangana (Riya) and Hansraj (Neer) invite you to celebrate their Wedding Reception on Friday, 11th December 2026 at Jaanki Farms and Resorts, Dhapkota, Jorhat, Assam.",
     url: "https://devanga-weds-hansraj.invitestory.in/",
     ogImage: "https://devanga-weds-hansraj.invitestory.in/assets/og-image.jpg"
   },
   couple: {
-    bride: "Devangana(Riya)",
-    groom: "Hansraj(Neer)",
-    coupleLine: ["Devangana(Riya)", "Hansraj(Neer)"],
+    bride: "Devangana (Riya)",
+    groom: "Hansraj (Neer)",
+    coupleLine: ["Devangana (Riya)", "Hansraj (Neer)"],
     connector: "weds",
     hashtag: "#DevanganaWedsHansraj",
     intro: "Together with their families"
