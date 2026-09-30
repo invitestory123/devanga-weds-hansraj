@@ -265,7 +265,10 @@
 
     <!-- Music Player -->
     <div id="music-control">
-      <audio id="wedding-audio" src="./editable/assets/music.webm" loop preload="auto"></audio>
+      <audio id="wedding-audio" loop preload="auto" playsinline webkit-playsinline>
+        <source src="./editable/assets/music.mp3" type="audio/mpeg">
+        <source src="./editable/assets/music.webm" type="audio/webm">
+      </audio>
       <button id="music-btn" type="button" aria-label="Toggle background music" title="Play / Pause Music">
         <svg class="music-disc" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"></circle>
@@ -279,7 +282,15 @@
       (function() {
         const audio = document.getElementById('wedding-audio');
         const btn = document.getElementById('music-btn');
-        let hasInteracted = false;
+        if (!audio || !btn) return;
+
+        // Sync with WEDDING_DATA if custom music path defined
+        try {
+          const customMusic = window.WEDDING_DATA && window.WEDDING_DATA.assets && window.WEDDING_DATA.assets.music;
+          if (customMusic && !audio.currentSrc) {
+            audio.src = customMusic;
+          }
+        } catch (_) {}
 
         function updateState() {
           if (!audio.paused) {
@@ -289,32 +300,63 @@
           }
         }
 
+        function tryPlay() {
+          if (!audio.paused) {
+            cleanupInteractionListeners();
+            return;
+          }
+          const playPromise = audio.play();
+          if (playPromise !== undefined) {
+            playPromise.then(function() {
+              updateState();
+              cleanupInteractionListeners();
+            }).catch(function() {
+              // Autoplay waiting for direct user gesture
+            });
+          }
+        }
+
+        function onInteraction() {
+          tryPlay();
+        }
+
+        function cleanupInteractionListeners() {
+          document.removeEventListener('click', onInteraction);
+          document.removeEventListener('touchstart', onInteraction);
+          document.removeEventListener('touchend', onInteraction);
+          document.removeEventListener('pointerdown', onInteraction);
+          document.removeEventListener('keydown', onInteraction);
+        }
+
+        // Tap or click anywhere on page initiates music smoothly
+        document.addEventListener('click', onInteraction, { passive: true });
+        document.addEventListener('touchstart', onInteraction, { passive: true });
+        document.addEventListener('touchend', onInteraction, { passive: true });
+        document.addEventListener('pointerdown', onInteraction, { passive: true });
+        document.addEventListener('keydown', onInteraction, { passive: true });
+
+        // Direct button click toggles play / pause
         btn.addEventListener('click', function(e) {
           e.stopPropagation();
+          e.preventDefault();
           if (audio.paused) {
-            audio.play().then(updateState).catch(() => {});
+            const p = audio.play();
+            if (p !== undefined) {
+              p.then(updateState).catch(function() {});
+            }
           } else {
             audio.pause();
             updateState();
           }
         });
 
-        function tryAutoPlay() {
-          if (hasInteracted) return;
-          hasInteracted = true;
-          audio.play().then(updateState).catch(function() {
-            // Autoplay blocked; user can tap button
-          });
-          window.removeEventListener('click', tryAutoPlay);
-          window.removeEventListener('touchstart', tryAutoPlay);
-          window.removeEventListener('scroll', tryAutoPlay);
-        }
-
-        window.addEventListener('click', tryAutoPlay, { passive: true, once: true });
-        window.addEventListener('touchstart', tryAutoPlay, { passive: true, once: true });
-        window.addEventListener('scroll', tryAutoPlay, { passive: true, once: true });
         audio.addEventListener('play', updateState);
+        audio.addEventListener('playing', updateState);
         audio.addEventListener('pause', updateState);
+        audio.addEventListener('ended', updateState);
+
+        // Attempt initial autoplay on load if browser policy permits
+        tryPlay();
       })();
     </script>
   </body>

@@ -117,7 +117,7 @@ window.WEDDING_DATA = {
     heroFlatlay: "./editable/assets/hero-flatlay.jpg",
     jasmineStrand: "./editable/assets/jasmine-strand.png",
     gopuram: "./editable/assets/gopuram.png",
-    music: "./editable/assets/music.webm",
+    music: "./editable/assets/music.mp3",
     ogImage: "./editable/assets/og-image.jpg"
   },
 
