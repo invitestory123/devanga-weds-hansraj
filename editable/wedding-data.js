@@ -132,7 +132,7 @@ window.WEDDING_DATA = {
     },
     {
       src: "./editable/assets/couple-2.jpg",
-      alt: "Engagement ceremony of Hansraj and Devangana"
+      alt: "Devangana and Hansraj signing marriage documents"
     },
     {
       src: "./editable/assets/couple-1.jpg",
